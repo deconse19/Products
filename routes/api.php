@@ -36,6 +36,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 });
 
 
+
 Route::group(['prefix' => 'company'], function () {
     Route::post('/', [CompanyController::class, 'index']);
     Route::post('add', [CompanyController::class, 'add']);
