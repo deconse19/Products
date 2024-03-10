@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddProductRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\FindProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+
 use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index(FindProductRequest $request)
     {
 
         $list = Product::when($request->search, function ($query, $search) {
             $query->where('name', 'LIKE', "%{$search}%")
                 ->where('price', '>', 0)
-                ->orWhere('description', "%{$search}%")
-                ->orWhere('category', "%{$search}%");
+                ->orWhere('description', "%{$search}%");
         })->get();
 
         return response()->json($list);
@@ -24,13 +25,7 @@ class ProductController extends Controller
     public function add(AddProductRequest $request)
     {
 
-        $list = Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'description' => $request->description,
-            'category' => $request->category
-
-        ]);
+        $list = Product::create($request->validated());
 
         return response()->json([
             'message' => 'added',
@@ -38,7 +33,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(UpdateProductRequest $request)
     {
 
         $list = Product::find($request->id);

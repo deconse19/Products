@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +24,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix'=>'product'], function() {
-    Route::post('/', [ProductController::class, 'index']);
-    Route::post('add', [ProductController::class, 'add']);
-    Route::post('update', [ProductController::class, 'update']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::post('/update_profile', [UserController::class, 'createProfile']);
+    Route::post('/purchase', [UserController::class, 'userPurchase']);
 });
 
-Route::group(['prefix'=>'login'], function() {
-    Route::post('/', [LoginController::class, 'logIn']);
-    Route::post('signup', [LoginController::class, 'signUp']);
+
+Route::group(['prefix' => 'company'], function () {
+    Route::post('/', [CompanyController::class, 'index']);
+    Route::post('add', [CompanyController::class, 'add']);
+    Route::post('update', [CompanyController::class, 'update']);
+
+    Route::post('/create_product', [CompanyController::class, 'createProduct']);
+
+    Route::post('add_product', [ProductController::class, 'add']);
+    Route::post('update_product', [ProductController::class, 'update']);
+   
 });
 
-
+Route::group(['prefix' => 'company'], function () {
+   
+});

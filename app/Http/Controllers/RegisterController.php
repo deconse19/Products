@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginUserRequest;
-use App\Http\Requests\SignupUserRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Mail\VerificationMail;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -16,16 +12,12 @@ class RegisterController extends Controller
 {
 
 
-    public function signUp(SignupUserRequest $request)
+    public function register(RegisterRequest $request)
     {
         DB::beginTransaction();
         try {
          
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-            ]);
+            $user = User::create($request->validated());
 
             Mail::to($request->email)->send(new VerificationMail($user));
             
@@ -33,7 +25,7 @@ class RegisterController extends Controller
             return response()->json([
                 'message' => 'User register successfully.',
                 'status'    => $user
-            ]);
+            ],201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
