@@ -27,6 +27,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
+    Route::post('/change_password', [UserController::class, 'changePassword']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
