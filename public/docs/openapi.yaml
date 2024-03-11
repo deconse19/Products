@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/login:
+    post:
+      summary: 'Login user and create access token'
+      operationId: loginUserAndCreateAccessToken
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Authentication management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: pwindler@example.org
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: 'Jql*Q,/'
+              required:
+                - email
+                - password
+      security: []
+  /api/user/logout:
+    post:
+      summary: 'Logs out the user'
+      operationId: logsOutTheUser
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Authentication management'
+      security: []
+  /api/company/add:
+    post:
+      summary: 'Adds a new company to the database'
+      operationId: addsANewCompanyToTheDatabase
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Company management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: laudantium
+                description:
+                  type: string
+                  description: ''
+                  example: praesentium
+                location:
+                  type: string
+                  description: ''
+                  example: qui
+              required:
+                - name
+                - description
+                - location
+      security: []
+  /api/company/update:
+    post:
+      summary: 'Updates an existing company in the database'
+      operationId: updatesAnExistingCompanyInTheDatabase
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Company management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: cum
+                description:
+                  type: string
+                  description: ''
+                  example: dolores
+                location:
+                  type: string
+                  description: ''
+                  example: similique
+              required:
+                - name
+                - description
+                - location
+      security: []
+  /api/company/create_product:
+    post:
+      summary: 'Adds a new product to the specified company'
+      operationId: addsANewProductToTheSpecifiedCompany
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Company management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                  description: ''
+                  example: totam
+                company_id:
+                  type: string
+                  description: ''
+                  example: quae
+              required:
+                - product_id
+                - company_id
+      security: []
+  /api/company/add_product:
+    post:
+      summary: 'Adds a new product to the database'
+      operationId: addsANewProductToTheDatabase
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: tenetur
+                price:
+                  type: number
+                  description: ''
+                  example: 599860.82711754
+                description:
+                  type: string
+                  description: ''
+                  example: 'Consequatur expedita exercitationem dolorem consequatur alias.'
+              required:
+                - name
+                - price
+      security: []
+  /api/company/update_product:
+    post:
+      summary: 'Updates an existing product in the database'
+      operationId: updatesAnExistingProductInTheDatabase
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: tempora
+                price:
+                  type: number
+                  description: ''
+                  example: 9.22612537
+                description:
+                  type: string
+                  description: ''
+                  example: 'Magni saepe sit esse.'
+              required:
+                - name
+                - price
+      security: []
+  /api/register:
+    post:
+      summary: 'Register a new user'
+      operationId: registerANewUser
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'User management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: qui
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: sabryna.mills@example.com
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: '?\mFO;L:]Q9nry'
+                c_password:
+                  type: string
+                  description: 'The value and <code>password</code> must match.'
+                  example: asperiores
+              required:
+                - name
+                - email
+                - password
+                - c_password
+      security: []
+  /api/user/update_profile:
+    post:
+      summary: 'Create a new user profile'
+      operationId: createANewUserProfile
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'User management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: ''
+                  example: aliquid
+                last_name:
+                  type: string
+                  description: ''
+                  example: nemo
+                age:
+                  type: number
+                  description: 'Must be at least 3.'
+                  example: 77
+                gender:
+                  type: string
+                  description: ''
+                  example: nihil
+                phone:
+                  type: string
+                  description: ''
+                  example: sunt
+                address:
+                  type: string
+                  description: ''
+                  example: et
+              required:
+                - first_name
+                - last_name
+                - age
+                - gender
+                - phone
+                - address
+      security: []
+  /api/user/purchase:
+    post:
+      summary: "Attach a product to the user's cart if the user is currently logged in."
+      operationId: attachAProductToTheUsersCartIfTheUserIsCurrentlyLoggedIn
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'User management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                  description: ''
+                  example: quod
+                quantity:
+                  type: number
+                  description: 'Must be at least 1.'
+                  example: 66
+              required:
+                - product_id
+                - quantity
+      security: []
+tags:
+  -
+    name: 'Authentication management'
+    description: "\nAPIs for managing authentication"
+  -
+    name: 'Company management'
+    description: "\nAPIs for managing users"
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: 'User management'
+    description: "\nAPIs for managing users"

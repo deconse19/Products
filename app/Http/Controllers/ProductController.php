@@ -10,6 +10,12 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    /**
+     * Search for products
+     *
+     * @param FindProductRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(FindProductRequest $request)
     {
 
@@ -22,6 +28,12 @@ class ProductController extends Controller
         return response()->json($list);
     }
 
+    /**
+     * Adds a new product to the database
+     *
+     * @param AddProductRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function add(AddProductRequest $request)
     {
 
@@ -32,6 +44,12 @@ class ProductController extends Controller
             'data' => $list
         ]);
     }
+    /**
+     * Updates an existing product in the database
+     *
+     * @param UpdateProductRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function update(UpdateProductRequest $request)
     {

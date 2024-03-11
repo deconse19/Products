@@ -3,19 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCompanyRequest;
+use App\Http\Requests\CompanyProductRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+/**
+ * @group Company management
+ *
+ * APIs for managing users
+ */
+
 class CompanyController extends Controller
 {
-    public  function index()
-    {
-        $company = Company::all();
-
-        return response()->json($company);
-    }
+    
+    /**
+     * Adds a new company to the database
+     *
+     * @param AddCompanyRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public  function add(AddCompanyRequest $request)
     {
         $copmany = Company::create($request->validated());
@@ -25,6 +33,12 @@ class CompanyController extends Controller
             'message' => 'Success'
         ], 200);
     }
+    /**
+     * Updates an existing company in the database
+     *
+     * @param UpdateCompanyRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public  function update(UpdateCompanyRequest $request)
     {
         $compay = Company::find($request->id)->update([
@@ -39,8 +53,13 @@ class CompanyController extends Controller
             'message' => 'Success'
         ], 200);
     }
-
-    public function createProduct(Request $request)
+    /**
+     * Adds a new product to the specified company
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function createProduct(CompanyProductRequest $request)
     {
         $product = Product::findOrFail($request->product_id);
         $company = Company::findOrFail($request->company_id);

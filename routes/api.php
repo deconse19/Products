@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -20,11 +19,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('register', [RegisterController::class, 'register']);
+Route::post('register', [UserController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
@@ -49,6 +48,3 @@ Route::group(['prefix' => 'company'], function () {
    
 });
 
-Route::group(['prefix' => 'company'], function () {
-   
-});

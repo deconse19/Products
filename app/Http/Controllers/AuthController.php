@@ -6,8 +6,21 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+/**
+ * @group Authentication management
+ *
+ * APIs for managing authentication
+ */
+
 class AuthController extends Controller
 {
+    /**
+     * Login user and create access token
+     *
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request)
     {
 
@@ -35,6 +48,12 @@ class AuthController extends Controller
             ]);
         }
     }
+    /**
+     * Logs out the user 
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();

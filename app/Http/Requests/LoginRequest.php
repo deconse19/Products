@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use function Laravel\Prompts\password;
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -22,7 +24,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => 'email|required',
+            'password' => 'password|required|min:8',
         ];
     }
 }
