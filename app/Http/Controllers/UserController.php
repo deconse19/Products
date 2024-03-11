@@ -53,7 +53,7 @@ class UserController extends Controller
     }
 
     /**
-     * Create a new user profile
+     * Create a new user profileeeeeeeeeeeeeeee
      *
      * @param CreateUserProfileRequest $request
      * @return \Illuminate\Http\JsonResponse
